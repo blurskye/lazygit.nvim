@@ -88,8 +88,11 @@ function M.toggle_git()
             vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
             vim.api.nvim_buf_set_option(M.git_buf, 'bufhidden', 'hide')
 
-            -- Open lazygit in the terminal and set a callback to close the buffer when the process exits
-            vim.fn.termopen("lazygit", {
+            -- Get the directory of the current file
+            local dir = vim.fn.expand('%:p:h')
+
+            -- Open lazygit in the terminal in the directory of the current file and set a callback to close the buffer when the process exits
+            vim.fn.termopen("cd " .. dir .. " && lazygit", {
                 on_exit = function()
                     vim.api.nvim_buf_delete(M.git_buf, { force = true })
                     M.git_buf = nil
