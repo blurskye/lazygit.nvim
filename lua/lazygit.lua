@@ -74,7 +74,7 @@ function M.toggle_git()
         end
     else
         -- If the git buffer does not exist or is not valid, or if the lazygit process has exited, create it
-        if M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) or vim.fn.jobwait({vim.api.nvim_buf_get_option(M.git_buf, 'channel')}, 0)[1] == -1 then
+        if M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) or vim.fn.jobwait({ vim.api.nvim_buf_get_option(M.git_buf, 'channel') }, 0)[1] == -1 then
             M.git_buf = vim.api.nvim_create_buf(false, true)
             M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
                 relative = "editor",
@@ -93,5 +93,6 @@ function M.toggle_git()
             vim.cmd('startinsert')
         end
     end
+end
 
 return M
