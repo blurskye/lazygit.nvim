@@ -92,7 +92,7 @@ function M.toggle_git()
                 relative = "editor",
                 width = vim.o.columns,
                 height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
-                col = 0,
+                col = 1,                  -- Adjust the column to prevent the window from going to the left
                 row = 0,
             })
             vim.cmd('startinsert')
