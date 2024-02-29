@@ -31,6 +31,7 @@ function M.resize_git_win()
 
             -- Set the current window to the git window
             vim.api.nvim_set_current_win(M.git_win)
+            vim.cmd('normal! gg^') -- Go to the first non-blank character of the first line
 
 
             -- Ensure we're in normal mode, then reorient the git window
