@@ -14,6 +14,19 @@ function M.setup(config)
         { noremap = true, silent = true })
     vim.api.nvim_set_keymap('t', M.config.toggle_key, '<cmd>lua require("lazygit").toggle_git()<CR>',
         { noremap = true, silent = true })
+    vim.cmd('autocmd VimResized * lua require("lazygit").resize_git_win()')
+end
+
+function M.resize_git_win()
+    if M.git_win and vim.api.nvim_win_is_valid(M.git_win) then
+        vim.api.nvim_win_set_config(M.git_win, {
+            relative = "editor",
+            width = vim.o.columns,
+            height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
+            col = 0,
+            row = 0,
+        })
+    end
 end
 
 -- function M.toggle_git()
