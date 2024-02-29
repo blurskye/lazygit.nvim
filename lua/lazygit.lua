@@ -17,10 +17,10 @@ function M.setup(config)
 end
 
 function M.toggle_git()
-    if vim.api.nvim_buf_get_name(0) == " LAZYGIT" then
+    if vim.api.nvim_buf_get_name(0) == " LAZYGIT" then
         vim.api.nvim_win_hide(M.git_win)
         M.git_win = nil
-    elseif M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) or vim.fn.jobwait({ vim.fn.bufgetoption(M.git_buf, 'channel') }, 0)[1] == -1 then
+    elseif M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) then
         M.git_buf = vim.api.nvim_create_buf(false, true)
         M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
             relative = "editor",
