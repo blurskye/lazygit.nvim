@@ -19,13 +19,16 @@ end
 
 function M.resize_git_win()
     if M.git_win and vim.api.nvim_win_is_valid(M.git_win) then
-        vim.api.nvim_win_set_config(M.git_win, {
-            relative = "editor",
-            width = vim.o.columns,
-            height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
-            col = 0,
-            row = 0,
-        })
+        -- Delay the resizing by 100ms to allow the new size to be available
+        vim.defer_fn(function()
+            vim.api.nvim_win_set_config(M.git_win, {
+                relative = "editor",
+                width = vim.o.columns,
+                height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
+                col = 0,
+                row = 0,
+            })
+        end, 100)
     end
 end
 
