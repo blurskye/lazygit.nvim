@@ -28,15 +28,12 @@ function M.resize_git_win()
                 col = 1,                  -- Adjust the column to prevent the window from going to the left
                 row = 0,
             })
-        end, 100)
-        vim.defer_fn(function()
-            vim.api.nvim_win_set_config(M.git_win, {
-                relative = "editor",
-                width = vim.o.columns,
-                height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
-                col = 1,                  -- Adjust the column to prevent the window from going to the left
-                row = 0,
-            })
+
+            -- Set the current window to the git window
+            vim.api.nvim_set_current_win(M.git_win)
+
+            -- Reorient the git window
+            vim.api.nvim_feedkeys('gg0i', 'n', false)
         end, 100)
     end
 end
