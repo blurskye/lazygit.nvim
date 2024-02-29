@@ -12,7 +12,7 @@ function M.setup(config)
         M.config = vim.tbl_extend('force', M.config, config)
     end
 
-    vim.api.nvim_set_keymap('n', M.config.toggle_key, '<cmd>lua require("sky-git").toggle_git()<CR>',
+    vim.api.nvim_set_keymap('n', M.config.toggle_key, '<cmd>lua require("lazygit").toggle_git()<CR>',
         { noremap = true, silent = true })
     vim.api.nvim_set_keymap('t', M.config.toggle_key, '<cmd>lua require("lazygit").toggle_git()<CR>',
         { noremap = true, silent = true })
