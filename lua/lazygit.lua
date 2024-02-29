@@ -97,7 +97,7 @@ function M.toggle_git()
             vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
             vim.api.nvim_buf_set_option(M.git_buf, 'bufhidden', 'hide')
             -- Set the name of the buffer to "lazygit"
-            vim.api.nvim_buf_set_name(M.git_buf, " lazygit")
+
             -- Get the directory of the current file
             local dir = vim.fn.expand('%:p:h')
 
@@ -111,6 +111,7 @@ function M.toggle_git()
             })
 
             -- Hide line numbers in the git window
+            vim.api.nvim_buf_set_name(M.git_buf, " lazygit")
             vim.api.nvim_win_set_option(M.git_win, 'number', false)
             vim.api.nvim_win_set_option(M.git_win, 'relativenumber', false)
             vim.cmd('startinsert')
