@@ -73,24 +73,25 @@ function M.toggle_git()
             vim.cmd('startinsert')
         end
     else
-        -- If the git buffer does not exist or is not valid, create it
-        M.git_buf = vim.api.nvim_create_buf(false, true)
-        M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
-            relative = "editor",
-            width = vim.o.columns,
-            height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
-            col = 0,
-            row = 0,
-        })
-        vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
-        vim.api.nvim_buf_set_option(M.git_buf, 'bufhidden', 'hide')
-        vim.fn.termopen("lazygit")
+        -- If the git buffer does not exist or is not valid, or if the lazygit process has exited, create it
+        if M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) or vim.fn.jobwait({vim.api.nvim_buf_get_option(M.git_buf, 'channel')}, 0)[1] == -1 then
+            M.git_buf = vim.api.nvim_create_buf(false, true)
+            M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
+                relative = "editor",
+                width = vim.o.columns,
+                height = vim.o.lines - 1, -- Subtract 1 to leave space for the status line
+                col = 0,
+                row = 0,
+            })
+            vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
+            vim.api.nvim_buf_set_option(M.git_buf, 'bufhidden', 'hide')
+            vim.fn.termopen("lazygit")
 
-        -- Hide line numbers in the git window
-        vim.api.nvim_win_set_option(M.git_win, 'number', false)
-        vim.api.nvim_win_set_option(M.git_win, 'relativenumber', false)
-        vim.cmd('startinsert')
+            -- Hide line numbers in the git window
+            vim.api.nvim_win_set_option(M.git_win, 'number', false)
+            vim.api.nvim_win_set_option(M.git_win, 'relativenumber', false)
+            vim.cmd('startinsert')
+        end
     end
-end
 
 return M
