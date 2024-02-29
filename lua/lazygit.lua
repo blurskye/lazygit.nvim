@@ -112,9 +112,9 @@ function M.toggle_git()
             -- })
             M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
                 relative = "editor",
-                width = vim.o.columns // 2, -- Half the screen width
-                height = vim.o.lines - 1,   -- Subtract 1 to leave space for the status line
-                col = vim.o.columns // 4,   -- Center the window
+                width = vim.o.columns / 2, -- Half the screen width
+                height = vim.o.lines - 1,  -- Subtract 1 to leave space for the status line
+                col = vim.o.columns / 4,   -- Center the window
                 row = 0,
             })
             vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
