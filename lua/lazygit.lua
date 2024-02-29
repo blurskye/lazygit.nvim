@@ -55,6 +55,15 @@ end
 --     end
 --     vim.cmd('startinsert')
 -- end
+
+function M.lualine_component()
+    if M.git_buf and vim.api.nvim_buf_is_valid(M.git_buf) then
+        return ' Lazygit'
+    else
+        return ''
+    end
+end
+
 function M.toggle_git()
     if M.git_buf and vim.api.nvim_buf_is_valid(M.git_buf) then
         -- If the git window is open, hide it
