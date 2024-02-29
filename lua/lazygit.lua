@@ -32,8 +32,8 @@ function M.resize_git_win()
             -- Set the current window to the git window
             vim.api.nvim_set_current_win(M.git_win)
 
-            -- Reorient the git window
-            vim.api.nvim_feedkeys('gg0i', 'n', false)
+            -- Ensure we're in normal mode, then reorient the git window
+            vim.api.nvim_feedkeys('\27gg0i', 'n', false) -- \27 is the escape key in ASCII, which switches to normal mode
         end, 100)
     end
 end
