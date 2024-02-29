@@ -131,6 +131,7 @@ function M.toggle_git()
             vim.api.nvim_win_set_option(M.git_win, 'number', false)
             vim.api.nvim_win_set_option(M.git_win, 'relativenumber', false)
             vim.cmd('startinsert')
+            M.resize_git_win()
         end
     end
 end
