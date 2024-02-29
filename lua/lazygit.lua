@@ -75,7 +75,7 @@ function M.toggle_git()
     else
         -- If the git buffer does not exist or is not valid, create it
         local job_id = M.git_buf and vim.api.nvim_buf_is_valid(M.git_buf) and
-        vim.fn.jobpid(vim.api.nvim_buf_get_option(M.git_buf, 'channel'))
+            vim.fn.jobpid(vim.api.nvim_buf_get_option(M.git_buf, 'channel'))
         if M.git_buf == nil or not vim.api.nvim_buf_is_valid(M.git_buf) or (job_id and vim.fn.jobstop(job_id) ~= 0) then
             M.git_buf = vim.api.nvim_create_buf(false, true)
             M.git_win = vim.api.nvim_open_win(M.git_buf, true, {
@@ -87,7 +87,8 @@ function M.toggle_git()
             })
             vim.api.nvim_buf_set_option(M.git_buf, 'buftype', 'nofile')
             vim.api.nvim_buf_set_option(M.git_buf, 'bufhidden', 'hide')
-
+            -- Set the name of the buffer to "lazygit"
+            vim.api.nvim_buf_set_name(M.git_buf, " lazygit")
             -- Get the directory of the current file
             local dir = vim.fn.expand('%:p:h')
 
