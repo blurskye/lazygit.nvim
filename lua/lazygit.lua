@@ -33,7 +33,7 @@ function M.resize_git_win()
             vim.api.nvim_set_current_win(M.git_win)
 
             -- Ensure we're in normal mode, then reorient the git window
-            vim.cmd('normal! gg0i')
+            vim.cmd('<cmd>normal! gg0i')
         end, 100)
     end
 end
